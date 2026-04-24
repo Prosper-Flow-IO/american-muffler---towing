@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# No staging/admin paths in prototype
+Disallow: /admin/
+Disallow: /api/
+
+# Preferred sitemap
+Sitemap: https://www.americanmufflerandtowing.com/sitemap.xml
