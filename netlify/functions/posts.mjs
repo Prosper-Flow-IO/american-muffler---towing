@@ -15,6 +15,14 @@ async function uniqueSlug(base, selfId) {
   return `${base}-${i}`;
 }
 
+function cleanFaqs(raw) {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .map((f) => ({ q: String(f?.q || '').trim().slice(0, 300), a: String(f?.a || '').trim().slice(0, 1200) }))
+    .filter((f) => f.q && f.a)
+    .slice(0, 12);
+}
+
 function clean(body) {
   return {
     title: String(body.title || '').trim().slice(0, 160),
@@ -24,6 +32,7 @@ function clean(body) {
     author: String(body.author || '').trim().slice(0, 80),
     tags: Array.isArray(body.tags) ? body.tags.map((t) => String(t).trim().slice(0, 40)).filter(Boolean).slice(0, 12)
       : String(body.tags || '').split(',').map((t) => t.trim()).filter(Boolean).slice(0, 12),
+    faqs: cleanFaqs(body.faqs),
     status: body.status === 'published' ? 'published' : 'draft',
   };
 }

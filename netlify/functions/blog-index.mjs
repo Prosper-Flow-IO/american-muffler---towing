@@ -1,5 +1,5 @@
 import { listPosts } from '../lib/store.mjs';
-import { page, SITE } from '../lib/blog-render.mjs';
+import { page, SITE, businessNode, breadcrumbNode } from '../lib/blog-render.mjs';
 import { escapeHtml, toPlain } from '../lib/markdown.mjs';
 
 const fmt = (iso) => iso ? new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
@@ -39,10 +39,21 @@ export default async () => {
   </div>
 </section>`;
 
+  const graph = [
+    businessNode(),
+    {
+      '@type': 'Blog', '@id': `${SITE.base}/blog/#blog`, name: `${SITE.name} Blog`,
+      url: `${SITE.base}/blog/`, description: 'Towing, auto repair, tire, and muffler tips for Gallup, NM and the I-40 corridor.',
+      publisher: { '@id': `${SITE.base}/#business` },
+      blogPost: posts.map((p) => ({ '@type': 'BlogPosting', '@id': `${SITE.base}/blog/${p.slug}/#article`, headline: p.title, url: `${SITE.base}/blog/${p.slug}/`, datePublished: p.publishedAt })),
+    },
+    breadcrumbNode([{ name: 'Home', url: `${SITE.base}/` }, { name: 'Blog', url: `${SITE.base}/blog/` }]),
+  ];
   const html = page({
     title: 'Blog — Towing, Repair & Tire Tips in Gallup, NM | American Muffler & Towing',
     description: 'Guides and tips on towing, auto repair, tires, and mufflers from American Muffler & Towing in Gallup, NM.',
     canonical: `${SITE.base}/blog/`,
+    headExtra: `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>`,
     main,
   });
   return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=0, must-revalidate' } });

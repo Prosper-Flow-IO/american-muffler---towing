@@ -5,7 +5,37 @@ export const SITE = {
   phone: '+15058635990',
   phoneDisplay: '(505) 863-5990',
   icon: 'https://assets.cdn.filesafe.space/kst2bkxitM1nA0d1KJd4/media/69e7fc386fc69286f3b76ef1.jpeg',
+  image: 'https://assets.cdn.filesafe.space/kst2bkxitM1nA0d1KJd4/media/69e7fc385e482c379bc6a675.jpeg',
 };
+
+// Canonical business entity — reused by @id across all blog pages so search &
+// AI engines resolve every article to one clear local business.
+export function businessNode() {
+  return {
+    '@type': ['AutomotiveBusiness', 'AutoRepair', 'TowingService'],
+    '@id': `${SITE.base}/#business`,
+    name: SITE.name,
+    url: `${SITE.base}/`,
+    telephone: '+1-505-863-5990',
+    priceRange: '$$',
+    foundingDate: '2012',
+    image: SITE.image,
+    logo: { '@type': 'ImageObject', url: SITE.icon },
+    address: { '@type': 'PostalAddress', streetAddress: '827 N 9th St', addressLocality: 'Gallup', addressRegion: 'NM', postalCode: '87301', addressCountry: 'US' },
+    geo: { '@type': 'GeoCoordinates', latitude: 35.5370, longitude: -108.7389 },
+    openingHours: ['Mo-Sa 09:00-17:00'],
+    areaServed: ['Gallup NM', 'Church Rock NM', 'Thoreau NM', 'Grants NM', 'Milan NM', 'Yah-Ta-Hey NM', 'Zuni NM', 'Crownpoint NM', 'Window Rock AZ', 'Fort Defiance AZ', 'Lupton AZ', 'I-40 Corridor', 'Navajo Nation']
+      .map((n) => ({ '@type': 'Place', name: n })),
+    sameAs: ['https://www.facebook.com/p/American-Muffler-and-Towing-100054548645014/', 'https://www.yelp.com/biz/american-muffler-and-towing-gallup-2'],
+  };
+}
+
+export function breadcrumbNode(items) {
+  return {
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, item: it.url })),
+  };
+}
 
 const PHONE_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.35 1.84.59 2.8.72A2 2 0 0 1 22 16.92Z"/></svg>';
 
