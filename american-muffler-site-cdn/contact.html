@@ -15,7 +15,7 @@
 <meta property="og:image" content="https://assets.cdn.filesafe.space/kst2bkxitM1nA0d1KJd4/media/69e7fc38da11eeea68f40ac3.jpeg" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" href="https://assets.cdn.filesafe.space/kst2bkxitM1nA0d1KJd4/media/69e7fc386fc69286f3b76ef1.jpeg" />
-<link rel="stylesheet" href="assets/css/site.css" />
+<link rel="stylesheet" href="/assets/css/site.css" />
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["AutomotiveBusiness","AutoRepair","TowingService"],"@id":"https://www.americanmufflerandtowing.com/#business","name":"American Muffler & Towing","url":"https://www.americanmufflerandtowing.com/","telephone":"+1-505-863-5990","priceRange":"$$","foundingDate":"2012","image":"https://assets.cdn.filesafe.space/kst2bkxitM1nA0d1KJd4/media/69e7fc385e482c379bc6a675.jpeg","address":{"@type":"PostalAddress","streetAddress":"827 N 9th St","addressLocality":"Gallup","addressRegion":"NM","postalCode":"87301","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":35.537,"longitude":-108.7389},"areaServed":[{"@type":"City","name":"Gallup, NM"},{"@type":"City","name":"Thoreau, NM"},{"@type":"City","name":"Grants, NM"},{"@type":"City","name":"Church Rock, NM"},{"@type":"City","name":"Yah-Ta-Hey, NM"},{"@type":"City","name":"Window Rock, AZ"},{"@type":"City","name":"Fort Defiance, AZ"},{"@type":"City","name":"Lupton, AZ"},{"@type":"Place","name":"I-40 Corridor, NW New Mexico"}],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"17:00","name":"Office hours"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59","name":"24/7 tow line"}]},{"@type":"WebSite","@id":"https://www.americanmufflerandtowing.com/#website","url":"https://www.americanmufflerandtowing.com/","name":"American Muffler & Towing","publisher":{"@id":"https://www.americanmufflerandtowing.com/#business"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.americanmufflerandtowing.com/"},{"@type":"ListItem","position":2,"name":"Contact","item":"https://www.americanmufflerandtowing.com/contact/"}]}]}</script>
 </head>
 <body>
@@ -31,6 +31,8 @@
     <nav aria-label="Primary">
       <ul>
         <li><a href="services.html">Services</a></li>
+        <li><a href="/shop/">Shop</a></li>
+        <li><a href="/blog/">Blog</a></li>
         <li><a href="service-areas.html">Service Areas</a></li>
         <li><a href="reviews.html">Reviews</a></li>
         <li><a href="about.html">About</a></li>
@@ -75,6 +77,69 @@
     </div>
   </div>
 </section>
+
+<section id="request" style="background:var(--bg-2);border-top:1px solid var(--line);">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Send us a message</p>
+      <h2>Request a tow, a quote, or a callback</h2>
+      <p>Fill this out and it goes straight to our team — we'll get right back to you. For an emergency tow, calling is always fastest.</p>
+    </div>
+    <div style="max-width:640px;margin:0 auto;">
+      <form id="leadForm" class="lead-form" novalidate>
+        <div class="lf-grid">
+          <div class="lf-field"><label for="lf-name">Name *</label><input id="lf-name" name="name" required autocomplete="name" /></div>
+          <div class="lf-field"><label for="lf-phone">Phone</label><input id="lf-phone" name="phone" type="tel" autocomplete="tel" /></div>
+          <div class="lf-field"><label for="lf-email">Email</label><input id="lf-email" name="email" type="email" autocomplete="email" /></div>
+          <div class="lf-field"><label for="lf-service">What do you need?</label>
+            <select id="lf-service" name="service">
+              <option value="">Choose a service…</option>
+              <option>Towing</option>
+              <option>Roadside Assistance</option>
+              <option>Auto Repair</option>
+              <option>Muffler &amp; Exhaust</option>
+              <option>Tires</option>
+              <option>Junk Car Removal</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="lf-field lf-full"><label for="lf-message">Details</label><textarea id="lf-message" name="message" rows="4" placeholder="Vehicle, location, and what's going on…"></textarea></div>
+        <div class="lf-hp" aria-hidden="true"><label>Company<input name="company" tabindex="-1" autocomplete="off" /></label></div>
+        <div class="lf-actions">
+          <button type="submit" class="btn btn-primary" id="lf-submit">Send message</button>
+          <span class="lf-alt">or call <a href="tel:+15058635990">(505) 863-5990</a> — 24/7</span>
+        </div>
+        <p class="lf-status" id="lf-status" role="status" aria-live="polite"></p>
+      </form>
+      <div id="lf-done" class="lf-done" hidden>
+        <div class="lf-check" aria-hidden="true">✓</div>
+        <h3>Thanks — we got it!</h3>
+        <p>Our team has been notified and will reach out shortly. If it's urgent, call <a href="tel:+15058635990">(505) 863-5990</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .lead-form{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px;box-shadow:var(--shadow-sm)}
+  .lf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:560px){.lf-grid{grid-template-columns:1fr}}
+  .lf-field{display:flex;flex-direction:column}
+  .lf-field.lf-full{margin-top:16px}
+  .lf-field label{font-weight:600;font-size:14px;margin-bottom:6px;color:var(--ink-2)}
+  .lead-form input,.lead-form select,.lead-form textarea{border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:16px;font-family:inherit;background:#fff;color:var(--ink);width:100%}
+  .lead-form input:focus,.lead-form select:focus,.lead-form textarea:focus{outline:2px solid rgba(200,16,46,.3);border-color:var(--accent)}
+  .lead-form textarea{resize:vertical}
+  .lf-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .lf-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:20px}
+  .lf-alt{color:var(--muted);font-size:14px}.lf-alt a{color:var(--accent);font-weight:700}
+  .lf-status{margin:14px 0 0;font-weight:600;font-size:14px;min-height:1px}
+  .lf-status.err{color:var(--accent)}
+  .lf-done{text-align:center;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-lg);padding:40px 26px;box-shadow:var(--shadow-sm)}
+  .lf-check{width:56px;height:56px;border-radius:50%;background:rgba(47,179,83,.14);color:#1E874A;display:grid;place-items:center;font-size:28px;font-weight:900;margin:0 auto 14px}
+  .lf-done h3{margin-bottom:8px}
+</style>
 
 <section style="background:var(--bg-2);border-top:1px solid var(--line);">
   <div class="container split">
@@ -174,5 +239,40 @@
   <div aria-hidden="true" style="font-size:22px;font-weight:900;">›</div>
 </a>
 <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+<script>
+(function(){
+  var form=document.getElementById('leadForm');
+  if(!form) return;
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var status=document.getElementById('lf-status');
+    var btn=document.getElementById('lf-submit');
+    status.textContent=''; status.classList.remove('err');
+    var data={
+      name:form.name.value.trim(),
+      phone:form.phone.value.trim(),
+      email:form.email.value.trim(),
+      service:form.service.value,
+      message:form.message.value.trim(),
+      company:form.company.value,
+      source: form.service.value==='Towing' ? 'towing' : 'contact-form'
+    };
+    if(!data.name || (!data.phone && !data.email)){
+      status.textContent='Please add your name and a phone number or email.'; status.classList.add('err'); return;
+    }
+    btn.disabled=true; btn.textContent='Sending…';
+    try{
+      var r=await fetch('/api/lead-submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+      var d=await r.json().catch(function(){return {};});
+      if(!r.ok) throw new Error(d.error||'Something went wrong. Please call us.');
+      form.hidden=true;
+      document.getElementById('lf-done').hidden=false;
+    }catch(err){
+      status.textContent=err.message; status.classList.add('err');
+      btn.disabled=false; btn.textContent='Send message';
+    }
+  });
+})();
+</script>
 </body>
 </html>

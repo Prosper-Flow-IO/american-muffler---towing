@@ -1,0 +1,204 @@
+# Netlify configuration for American Muffler & Towing
+# Static site + serverless product-catalog API. Site files in american-muffler-site-cdn/
+
+[build]
+  publish = "american-muffler-site-cdn"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# ---------------------------------------------------------------
+# Pretty URLs for the new Shop page and Admin portal
+# ---------------------------------------------------------------
+
+[[redirects]]
+  from = "/shop/"
+  to = "/shop.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/shop.html"
+  to = "/shop/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin/"
+  status = 301
+
+# ---------------------------------------------------------------
+# Serve the canonical "pretty" URLs (used in sitemap.xml and every
+# page's rel=canonical) from the flat HTML files — 200 rewrites.
+# ---------------------------------------------------------------
+
+[[redirects]]
+  from = "/services/towing/"
+  to = "/services-towing.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/services/roadside-assistance/"
+  to = "/services-roadside-assistance.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/services/auto-repair/"
+  to = "/services-auto-repair.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/services/muffler-exhaust/"
+  to = "/services-muffler-exhaust.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/services/tires/"
+  to = "/services-tires.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/services/junk-car-removal/"
+  to = "/services-junk-car-removal.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/services/"
+  to = "/services.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/service-areas/gallup-nm/"
+  to = "/service-areas-gallup-nm.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/service-areas/"
+  to = "/service-areas.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/about/"
+  to = "/about.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/reviews/"
+  to = "/reviews.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/contact/"
+  to = "/contact.html"
+  status = 200
+  force = true
+
+# ---------------------------------------------------------------
+# Redirect the flat .html URLs to their canonical pretty URLs so
+# only one URL per page gets indexed.
+# ---------------------------------------------------------------
+
+[[redirects]]
+  from = "/services-towing.html"
+  to = "/services/towing/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services-roadside-assistance.html"
+  to = "/services/roadside-assistance/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services-auto-repair.html"
+  to = "/services/auto-repair/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services-muffler-exhaust.html"
+  to = "/services/muffler-exhaust/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services-tires.html"
+  to = "/services/tires/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services-junk-car-removal.html"
+  to = "/services/junk-car-removal/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services.html"
+  to = "/services/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-gallup-nm.html"
+  to = "/service-areas/gallup-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas.html"
+  to = "/service-areas/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about.html"
+  to = "/about/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/reviews.html"
+  to = "/reviews/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact/"
+  status = 301
+  force = true
+
+# ---------------------------------------------------------------
+# Long-lived caching for static assets
+# ---------------------------------------------------------------
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/admin/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+[[headers]]
+  for = "/admin/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+    Service-Worker-Allowed = "/admin/"

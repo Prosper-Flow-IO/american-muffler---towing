@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex,nofollow" />
+<meta name="theme-color" content="#C8102E" />
+<title>Dashboard · American Muffler &amp; Towing</title>
+<link rel="manifest" href="/admin/manifest.webmanifest" />
+<link rel="icon" href="/admin/icon.svg" />
+<link rel="apple-touch-icon" href="https://assets.cdn.filesafe.space/kst2bkxitM1nA0d1KJd4/media/69e7fc386fc69286f3b76ef1.jpeg" />
+<style>
+  :root{
+    --bg:#f3f4f6;--panel:#fff;--ink:#0E1116;--ink-2:#39404b;--muted:#6b7280;--line:#e5e7eb;--line-2:#eef0f3;
+    --accent:#C8102E;--accent-deep:#8A0B20;--green:#1E874A;--green-bg:#e7f6ee;--amber:#8a6d1e;--amber-bg:#fbf3dd;
+    --blue:#1d4ed8;--blue-bg:#e6ecfd;--purple:#6d28d9;--purple-bg:#efe9fd;
+    --radius:12px;--shadow-sm:0 1px 2px rgba(16,17,22,.06);--shadow-md:0 12px 34px rgba(16,17,22,.14);
+    --sidebar:236px;--font:"Archivo",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:var(--font);letter-spacing:-.01em;margin:0}
+  button{font-family:inherit;cursor:pointer}
+  input,select,textarea{font-family:inherit;font-size:15px}
+  a{color:var(--accent)}
+  .hidden{display:none!important}
+  .btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:9px;font-weight:700;font-size:14px;padding:10px 15px;transition:transform .1s,box-shadow .1s,background .12s}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 6px 16px rgba(200,16,46,.3)}
+  .btn-primary:hover{background:#d81531}
+  .btn-light{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  .btn-light:hover{background:#f7f8fa}
+  .btn-dark{background:var(--ink);color:#fff}.btn-dark:hover{background:#22262e}
+  .btn-danger{background:#fff;color:var(--accent);border:1px solid #f0c9cf}.btn-danger:hover{background:#fdecef}
+  .btn-sm{padding:7px 11px;font-size:13px}
+  .btn svg{width:16px;height:16px}
+  .inp{width:100%;border:1px solid var(--line);border-radius:9px;padding:11px 13px;color:var(--ink);background:#fff}
+  .inp:focus{outline:2px solid rgba(200,16,46,.3);border-color:var(--accent)}
+  textarea.inp{resize:vertical;min-height:80px}
+  .lbl{display:block;font-weight:600;font-size:13px;margin:0 0 6px;color:var(--ink-2)}
+  .hint{color:var(--muted);font-size:12.5px;margin-top:5px}
+  .fg{margin-bottom:15px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  @media(max-width:560px){.grid2{grid-template-columns:1fr}}
+
+  /* ---------- loading / login ---------- */
+  .loading-screen{display:grid;place-items:center;min-height:100vh;color:var(--muted)}
+  .spinner{width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 12px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .login-wrap{min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(1000px 500px at 70% -10%,rgba(200,16,46,.14),transparent 60%),linear-gradient(180deg,#0E1116,#151A22)}
+  .login-card{background:var(--panel);border-radius:16px;box-shadow:var(--shadow-md);width:100%;max-width:400px;padding:34px 32px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--font);font-weight:800;font-size:16px;color:var(--ink)}
+  .brand .mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(140deg,var(--accent),var(--accent-deep));display:grid;place-items:center;font-weight:900;color:#fff;font-size:17px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.1)}
+  .brand small{display:block;font-size:10.5px;font-weight:500;color:#9aa2b1;letter-spacing:.1em;text-transform:uppercase;margin-top:1px}
+  .login-card .brand{justify-content:center;margin-bottom:8px}
+  .login-card h2{text-align:center;font-size:21px;margin:14px 0 4px}
+  .login-card .sub{text-align:center;color:var(--muted);font-size:13.5px;margin-bottom:22px}
+  .login-card .fg{margin-bottom:15px}.login-card .btn-primary{width:100%;justify-content:center;padding:12px}
+  .login-err{background:#fdecef;color:var(--accent-deep);border:1px solid #f3ccd3;border-radius:9px;padding:10px 12px;font-size:13.5px;margin-bottom:15px}
+
+  /* ---------- app shell ---------- */
+  .shell{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh}
+  .sidebar{background:var(--ink);color:#c6ccd6;position:fixed;top:0;bottom:0;left:0;width:var(--sidebar);display:flex;flex-direction:column;z-index:40}
+  .sidebar .brand{color:#fff;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.07)}
+  .side-nav{padding:12px 12px;flex:1;overflow:auto}
+  .side-nav a{display:flex;align-items:center;gap:11px;color:#c6ccd6;padding:11px 13px;border-radius:9px;font-weight:600;font-size:14.5px;margin-bottom:3px;position:relative}
+  .side-nav a:hover{background:rgba(255,255,255,.06);color:#fff}
+  .side-nav a.active{background:var(--accent);color:#fff}
+  .side-nav a svg{width:19px;height:19px;flex-shrink:0}
+  .side-nav a .count{margin-left:auto;background:rgba(255,255,255,.16);color:#fff;font-size:11.5px;font-weight:700;padding:1px 8px;border-radius:999px}
+  .side-nav a.active .count{background:rgba(255,255,255,.25)}
+  .side-foot{padding:12px;border-top:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column;gap:6px}
+  .side-foot a,.side-foot button{display:flex;align-items:center;gap:10px;color:#c6ccd6;padding:9px 13px;border-radius:9px;font-weight:600;font-size:13.5px;background:transparent;border:0;text-align:left;width:100%;cursor:pointer}
+  .side-foot a svg,.side-foot button svg{width:19px;height:19px;flex-shrink:0}
+  .side-foot a:hover,.side-foot button:hover{background:rgba(255,255,255,.06);color:#fff}
+  .content{grid-column:2;padding:0}
+  .mobilebar{display:none}
+
+  .topline{background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+  .topline .in{max-width:1000px;margin:0 auto;padding:16px 26px;display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .topline h1{font-size:23px}.topline p{margin:3px 0 0;color:var(--muted);font-size:13.5px}
+  .wrap{max-width:1000px;margin:0 auto;padding:24px 26px 90px}
+
+  @media(max-width:860px){
+    .shell{grid-template-columns:1fr}
+    .sidebar{transform:translateX(-100%);transition:transform .2s ease;box-shadow:var(--shadow-md)}
+    .sidebar.open{transform:none}
+    .content{grid-column:1}
+    .mobilebar{display:flex;align-items:center;gap:12px;background:var(--ink);color:#fff;padding:12px 16px;position:sticky;top:0;z-index:30}
+    .mobilebar .brand{color:#fff}.mobilebar .ham{background:rgba(255,255,255,.1);border:0;color:#fff;width:38px;height:38px;border-radius:9px;display:grid;place-items:center}
+    .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:35}
+    .topline .in,.wrap{padding-left:16px;padding-right:16px}
+  }
+
+  /* ---------- cards / stats ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow-sm)}
+  .stat .n{font-family:var(--font);font-weight:800;font-size:26px;line-height:1}
+  .stat .l{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.06em;margin-top:6px;font-weight:600}
+  .stat.accent .n{color:var(--accent)}.stat.green .n{color:var(--green)}.stat.blue .n{color:var(--blue)}
+  @media(max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:20px}
+  .panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+  .panel-head h3{font-size:16px}.panel-head .sub{color:var(--muted);font-size:13px;margin-top:2px}
+  .panel-body{padding:20px}
+
+  /* ---------- toolbar ---------- */
+  .toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+  .field{position:relative}.field svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted)}
+  .toolbar input[type=search]{border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:10px 12px 10px 34px;min-width:230px;color:var(--ink)}
+  .toolbar select{border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:10px 12px;color:var(--ink)}
+  .toolbar .spacer{flex:1}
+
+  /* ---------- table ---------- */
+  table{width:100%;border-collapse:collapse}
+  thead th{text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;padding:12px 16px;border-bottom:1px solid var(--line);background:#fafbfc}
+  tbody td{padding:12px 16px;border-bottom:1px solid var(--line-2);vertical-align:middle}
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr:hover{background:#fafbfc}
+  .clickable{cursor:pointer}
+  .thumb{width:50px;height:50px;border-radius:9px;object-fit:cover;background:#f0ece2;border:1px solid var(--line)}
+  .thumb.ph{display:grid;place-items:center;color:#c3bdb0}.thumb.ph svg{width:22px;height:22px}
+  .pname{font-weight:700;font-size:15px}.psku{color:var(--muted);font-size:12.5px;margin-top:2px}
+  .cat-pill{display:inline-block;background:#f1f2f4;color:var(--ink-2);font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:999px}
+  .price-c{font-weight:700;font-variant-numeric:tabular-nums}
+  .toggle{display:inline-flex;align-items:center;gap:7px;border:0;background:transparent;font-weight:700;font-size:12.5px;padding:4px 10px;border-radius:999px}
+  .toggle .dot{width:8px;height:8px;border-radius:50%}
+  .toggle.on{background:var(--green-bg);color:var(--green)}.toggle.on .dot{background:var(--green)}
+  .toggle.off{background:#f0ece2;color:var(--muted)}.toggle.off .dot{background:#b7b0a2}
+  .row-actions{display:flex;gap:7px;justify-content:flex-end}
+  .icon-btn{width:34px;height:34px;display:grid;place-items:center;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--ink-2)}
+  .icon-btn:hover{background:#f7f8fa;color:var(--ink)}
+  .icon-btn.danger:hover{background:#fdecef;color:var(--accent);border-color:#f0c9cf}.icon-btn svg{width:16px;height:16px}
+  .stock-c{font-variant-numeric:tabular-nums;color:var(--ink-2)}.stock-c.low{color:var(--amber);font-weight:700}.stock-c.out{color:var(--accent);font-weight:700}
+  .empty{padding:52px 20px;text-align:center;color:var(--muted)}.empty h3{color:var(--ink);margin-bottom:6px}
+
+  /* status pills */
+  .status{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:12px;padding:4px 10px;border-radius:999px;text-transform:capitalize}
+  .status.new{background:var(--blue-bg);color:var(--blue)}
+  .status.contacted{background:var(--amber-bg);color:var(--amber)}
+  .status.quoted{background:var(--purple-bg);color:var(--purple)}
+  .status.won{background:var(--green-bg);color:var(--green)}
+  .status.lost{background:#f0ece2;color:var(--muted)}
+  .src-pill{font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:3px 8px;border-radius:6px;background:#eef0f3;color:var(--ink-2)}
+  .src-pill.towing{background:#fde8ea;color:var(--accent)}
+
+  /* ---------- modal / slideover ---------- */
+  .overlay{position:fixed;inset:0;background:rgba(14,17,22,.55);z-index:50;display:grid;place-items:center;padding:20px}
+  .modal{background:var(--panel);border-radius:16px;box-shadow:var(--shadow-md);width:100%;max-width:560px;max-height:92vh;overflow:auto}
+  .modal-head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--panel)}
+  .modal-head h2{font-size:19px}.modal-body{padding:22px 24px}
+  .modal-foot{display:flex;gap:10px;justify-content:flex-end;padding:16px 24px;border-top:1px solid var(--line);position:sticky;bottom:0;background:var(--panel)}
+  .close-x{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:#fff;display:grid;place-items:center;color:var(--muted)}.close-x:hover{background:#f7f8fa;color:var(--ink)}
+  .slideover{position:fixed;top:0;right:0;bottom:0;width:440px;max-width:94vw;background:var(--panel);box-shadow:var(--shadow-md);z-index:55;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .2s ease}
+  .slideover.open{transform:none}
+  .so-head{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;border-bottom:1px solid var(--line)}
+  .so-body{padding:20px 22px;overflow:auto;flex:1}
+  .so-foot{padding:14px 22px;border-top:1px solid var(--line);display:flex;gap:10px}
+
+  .drop{border:2px dashed var(--line);border-radius:12px;padding:16px;text-align:center;color:var(--muted);cursor:pointer;transition:.12s;background:#fafbfc}
+  .drop:hover{border-color:var(--accent);background:#fef7f8}.drop.has{padding:0;border-style:solid;overflow:hidden;position:relative}
+  .drop.has img{width:100%;max-height:200px;object-fit:cover;display:block}
+  .drop .rm{position:absolute;top:8px;right:8px;background:rgba(14,17,22,.72);color:#fff;border:0;border-radius:8px;padding:6px 10px;font-size:12.5px;font-weight:600}
+  .drop svg{width:26px;height:26px;margin-bottom:6px;opacity:.7}.drop b{color:var(--accent)}
+  .switch{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:14px;color:var(--ink-2);cursor:pointer;user-select:none}
+  .switch input{position:absolute;opacity:0}
+  .track{width:44px;height:25px;border-radius:999px;background:#d5d8dd;position:relative;transition:.15s}
+  .track::after{content:"";position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:.15s}
+  .switch input:checked + .track{background:var(--green)}.switch input:checked + .track::after{transform:translateX(19px)}
+
+  /* integration cards */
+  .int-card{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:16px}
+  .int-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+  .int-ico{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;flex-shrink:0;color:#fff}
+  .int-ico svg{width:22px;height:22px}
+  .int-top h4{font-size:16px;margin-bottom:3px}.int-top p{margin:0;color:var(--muted);font-size:13px}
+  .int-badge{margin-left:auto;font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:999px;white-space:nowrap}
+  .int-badge.on{background:var(--green-bg);color:var(--green)}.int-badge.off{background:#f0ece2;color:var(--muted)}
+  .contact-line{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid var(--line-2);font-size:14.5px}
+  .contact-line:last-child{border-bottom:0}.contact-line .k{color:var(--muted);width:78px;flex-shrink:0;font-size:13px}
+  .note{background:#f7f8fa;border:1px solid var(--line-2);border-radius:9px;padding:10px 12px;margin-bottom:8px;font-size:13.5px}
+  .note .t{color:var(--muted);font-size:11.5px;margin-bottom:3px}
+
+  #toasts{position:fixed;right:18px;bottom:18px;z-index:80;display:flex;flex-direction:column;gap:10px}
+  .toast{background:var(--ink);color:#fff;padding:12px 16px;border-radius:10px;box-shadow:var(--shadow-md);font-size:14px;font-weight:600;max-width:340px;animation:slidein .2s ease}
+  .toast.ok{background:#12331f;border-left:3px solid var(--green)}.toast.err{background:#3a1116;border-left:3px solid var(--accent)}
+  @keyframes slidein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div id="boot" class="loading-screen"><div><div class="spinner"></div>Loading…</div></div>
+
+<!-- ============ LOGIN ============ -->
+<div id="login" class="login-wrap hidden">
+  <form class="login-card" id="loginForm" autocomplete="on">
+    <div class="brand"><span class="mark">A</span><span>American Muffler &amp; Towing<small>Dashboard</small></span></div>
+    <h2>Sign in</h2><p class="sub">Manage products, leads &amp; settings</p>
+    <div id="loginErr" class="login-err hidden"></div>
+    <div class="fg"><label class="lbl" for="u">Username</label><input class="inp" id="u" name="username" autocomplete="username" required /></div>
+    <div class="fg"><label class="lbl" for="p">Password</label><input class="inp" id="p" name="password" type="password" autocomplete="current-password" required /></div>
+    <button class="btn btn-primary" type="submit" id="loginBtn">Sign in</button>
+  </form>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="app" class="hidden">
+  <div class="mobilebar">
+    <button class="ham" id="ham" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    <div class="brand"><span class="mark">A</span><span>AM&amp;T<small>Dashboard</small></span></div>
+  </div>
+  <div class="shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><span class="mark">A</span><span>American Muffler<small>Dashboard</small></span></div>
+      <nav class="side-nav" id="sideNav">
+        <a href="#dashboard" data-sec="dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg> Dashboard</a>
+        <a href="#products" data-sec="products"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M20 7 12 3 4 7l8 4 8-4Z"/><path d="M4 7v10l8 4 8-4V7"/><path d="M12 11v10"/></svg> Products <span class="count" id="c-products">0</span></a>
+        <a href="#blog" data-sec="blog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/><path d="M9 7h7M9 11h7"/></svg> Blog <span class="count" id="c-posts">0</span></a>
+        <a href="#leads" data-sec="leads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg> Leads <span class="count" id="c-leads">0</span></a>
+        <a href="#integrations" data-sec="integrations"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg> Integrations</a>
+        <a href="#settings" data-sec="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg> Settings</a>
+      </nav>
+      <div class="side-foot">
+        <a href="/shop/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg> View shop</a>
+        <button id="logoutBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg> Log out</button>
+      </div>
+    </aside>
+
+    <div class="content">
+      <!-- DASHBOARD -->
+      <section data-view="dashboard">
+        <div class="topline"><div class="in"><div><h1>Dashboard</h1><p id="hello">Welcome back</p></div></div></div>
+        <div class="wrap">
+          <div class="stats">
+            <div class="stat green"><div class="n" id="d-live">0</div><div class="l">Live products</div></div>
+            <div class="stat blue"><div class="n" id="d-newleads">0</div><div class="l">New leads</div></div>
+            <div class="stat"><div class="n" id="d-totalleads">0</div><div class="l">Total leads</div></div>
+            <div class="stat accent"><div class="n" id="d-products">0</div><div class="l">Total products</div></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><h3>Recent leads</h3><div class="sub">Newest form submissions</div></div><a class="btn btn-light btn-sm" href="#leads">View all</a></div>
+            <div id="d-recent"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRODUCTS -->
+      <section data-view="products" class="hidden">
+        <div class="topline"><div class="in"><div><h1>Products</h1><p>Everything you sell. Changes appear on your Shop page instantly.</p></div>
+          <button class="btn btn-primary" id="addProd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> Add product</button></div></div>
+        <div class="wrap">
+          <div class="toolbar">
+            <div class="field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input type="search" id="pq" placeholder="Search products…"></div>
+            <select id="pcat"><option value="">All categories</option></select>
+          </div>
+          <div class="panel"><table><thead><tr><th style="width:66px"></th><th>Product</th><th>Category</th><th style="width:100px">Price</th><th style="width:80px">Stock</th><th style="width:100px">Status</th><th style="width:96px"></th></tr></thead><tbody id="prows"></tbody></table><div id="pEmpty" class="empty hidden"></div></div>
+        </div>
+      </section>
+
+      <!-- BLOG -->
+      <section data-view="blog" class="hidden">
+        <div class="topline"><div class="in"><div><h1>Blog</h1><p>Write posts to bring in local search traffic. Published posts appear at /blog/ and in your RSS feed.</p></div>
+          <button class="btn btn-primary" id="addPost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> New post</button></div></div>
+        <div class="wrap">
+          <div class="toolbar">
+            <div class="field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input type="search" id="bq" placeholder="Search posts…"></div>
+            <select id="bstatus"><option value="">All</option><option value="published">Published</option><option value="draft">Drafts</option></select>
+            <div class="spacer"></div>
+            <a class="btn btn-light btn-sm" href="/blog/" target="_blank" rel="noopener">View blog ↗</a>
+          </div>
+          <div class="panel"><table><thead><tr><th>Title</th><th style="width:120px">Status</th><th style="width:120px">Published</th><th style="width:130px"></th></tr></thead><tbody id="brows"></tbody></table><div id="bEmpty" class="empty hidden"></div></div>
+        </div>
+      </section>
+
+      <!-- LEADS -->
+      <section data-view="leads" class="hidden">
+        <div class="topline"><div class="in"><div><h1>Leads</h1><p>Every inquiry from your website, with a contact card for each.</p></div>
+          <button class="btn btn-primary" id="addLead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> Add lead</button></div></div>
+        <div class="wrap">
+          <div class="toolbar">
+            <div class="field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input type="search" id="lq" placeholder="Search leads…"></div>
+            <select id="lstatus"><option value="">All statuses</option><option value="new">New</option><option value="contacted">Contacted</option><option value="quoted">Quoted</option><option value="won">Won</option><option value="lost">Lost</option></select>
+          </div>
+          <div class="panel"><table><thead><tr><th>Name</th><th>Contact</th><th>Service</th><th>Source</th><th style="width:110px">Status</th><th style="width:96px">Date</th></tr></thead><tbody id="lrows"></tbody></table><div id="lEmpty" class="empty hidden"></div></div>
+        </div>
+      </section>
+
+      <!-- INTEGRATIONS -->
+      <section data-view="integrations" class="hidden">
+        <div class="topline"><div class="in"><div><h1>Integrations</h1><p>Choose how your team gets pinged when a new lead comes in.</p></div></div></div>
+        <div class="wrap" id="integWrap"><div class="empty"><div class="spinner"></div>Loading…</div></div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section data-view="settings" class="hidden">
+        <div class="topline"><div class="in"><div><h1>Settings</h1><p>Your account and business details.</p></div></div></div>
+        <div class="wrap" id="settingsWrap"><div class="empty"><div class="spinner"></div>Loading…</div></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- product modal -->
+<div id="pOverlay" class="overlay hidden"><form class="modal" id="prodForm">
+  <div class="modal-head"><h2 id="pModalTitle">Add product</h2><button type="button" class="close-x" data-close="pOverlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+  <div class="modal-body">
+    <input type="hidden" id="f-id">
+    <div class="fg"><label class="lbl" for="f-name">Product name *</label><input class="inp" id="f-name" required placeholder="e.g. Goodyear Wrangler 265/70R17"></div>
+    <div class="grid2">
+      <div class="fg"><label class="lbl" for="f-category">Category</label><input class="inp" id="f-category" list="catList" placeholder="Tires"><datalist id="catList"><option>Tires</option><option>Mufflers &amp; Exhaust</option><option>Auto Parts</option><option>Accessories</option><option>Batteries</option><option>Fluids &amp; Oil</option><option>Other</option></datalist></div>
+      <div class="fg"><label class="lbl" for="f-sku">SKU / part # <span style="font-weight:400;color:var(--muted)">(optional)</span></label><input class="inp" id="f-sku" placeholder="GY-2657017"></div>
+    </div>
+    <div class="grid2">
+      <div class="fg"><label class="lbl" for="f-price">Price (USD)</label><input class="inp" id="f-price" type="number" min="0" step="0.01" placeholder="0.00"><div class="hint">Leave 0 to show "Call for price".</div></div>
+      <div class="fg"><label class="lbl" for="f-stock">Stock qty <span style="font-weight:400;color:var(--muted)">(optional)</span></label><input class="inp" id="f-stock" type="number" min="0" step="1" placeholder="—"><div class="hint">Blank = don't track stock.</div></div>
+    </div>
+    <div class="fg"><label class="lbl" for="f-desc">Description</label><textarea class="inp" id="f-desc" placeholder="Short description customers will see…"></textarea></div>
+    <div class="fg"><label class="lbl">Photo</label><div class="drop" id="drop"></div></div>
+    <label class="switch"><input type="checkbox" id="f-active" checked><span class="track"></span><span>Show on public Shop page</span></label>
+  </div>
+  <div class="modal-foot"><button type="button" class="btn btn-light" data-close="pOverlay">Cancel</button><button type="submit" class="btn btn-primary" id="pSave">Save product</button></div>
+</form></div>
+
+<!-- lead add modal -->
+<div id="lOverlay" class="overlay hidden"><form class="modal" id="leadForm" style="max-width:480px">
+  <div class="modal-head"><h2>Add lead</h2><button type="button" class="close-x" data-close="lOverlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+  <div class="modal-body">
+    <div class="fg"><label class="lbl" for="l-name">Name *</label><input class="inp" id="l-name" required></div>
+    <div class="grid2"><div class="fg"><label class="lbl" for="l-phone">Phone</label><input class="inp" id="l-phone"></div><div class="fg"><label class="lbl" for="l-email">Email</label><input class="inp" id="l-email"></div></div>
+    <div class="fg"><label class="lbl" for="l-service">Service</label><input class="inp" id="l-service" list="svcList" placeholder="Towing"><datalist id="svcList"><option>Towing</option><option>Roadside Assistance</option><option>Auto Repair</option><option>Muffler &amp; Exhaust</option><option>Tires</option><option>Junk Car Removal</option><option>Other</option></datalist></div>
+    <div class="fg"><label class="lbl" for="l-message">Notes / message</label><textarea class="inp" id="l-message"></textarea></div>
+  </div>
+  <div class="modal-foot"><button type="button" class="btn btn-light" data-close="lOverlay">Cancel</button><button type="submit" class="btn btn-primary" id="lSave">Add lead</button></div>
+</form></div>
+
+<!-- blog post editor -->
+<div id="bOverlay" class="overlay hidden"><form class="modal" id="postForm" style="max-width:680px">
+  <div class="modal-head"><h2 id="bModalTitle">New post</h2><button type="button" class="close-x" data-close="bOverlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+  <div class="modal-body">
+    <input type="hidden" id="b-id">
+    <div class="fg"><label class="lbl" for="b-title">Title *</label><input class="inp" id="b-title" required placeholder="e.g. What to do when your car breaks down on I-40"></div>
+    <div class="fg"><label class="lbl" for="b-slug">URL slug</label><input class="inp" id="b-slug" placeholder="auto-generated from title"><div class="hint">Post address: <span id="b-slugpreview">/blog/…/</span></div></div>
+    <div class="fg"><label class="lbl" for="b-excerpt">Excerpt <span style="font-weight:400;color:var(--muted)">(1–2 sentence summary for cards, search &amp; RSS)</span></label><textarea class="inp" id="b-excerpt" style="min-height:60px" placeholder="Short summary shown in the blog list and search results…"></textarea></div>
+    <div class="fg"><label class="lbl">Cover image</label><div class="drop" id="postDrop"></div></div>
+    <div class="fg">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px"><label class="lbl" style="margin:0" for="b-content">Content</label>
+        <div style="display:flex;gap:6px"><button type="button" class="btn btn-light btn-sm" id="tabWrite">Write</button><button type="button" class="btn btn-light btn-sm" id="tabPreview">Preview</button></div></div>
+      <textarea class="inp" id="b-content" style="min-height:220px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px" placeholder="Write your post here.
+
+Use **bold**, *italic*, [links](https://…), and:
+# Big heading
+## Smaller heading
+- bullet point
+> a quote
+
+Leave a blank line between paragraphs."></textarea>
+      <div id="b-preview" class="prose hidden" style="border:1px solid var(--line);border-radius:9px;padding:16px 18px;min-height:220px;max-height:420px;overflow:auto"></div>
+      <div class="hint">Formatting: **bold**, *italic*, # headings, - lists, &gt; quotes, [text](url), ![alt](image-url).</div>
+    </div>
+    <div class="grid2">
+      <div class="fg"><label class="lbl" for="b-tags">Tags <span style="font-weight:400;color:var(--muted)">(comma-separated)</span></label><input class="inp" id="b-tags" placeholder="towing, tips, gallup"></div>
+      <div class="fg"><label class="lbl" for="b-author">Author <span style="font-weight:400;color:var(--muted)">(optional)</span></label><input class="inp" id="b-author" placeholder="American Muffler & Towing"></div>
+    </div>
+    <label class="switch"><input type="checkbox" id="b-published"><span class="track"></span><span>Publish (live on your site &amp; RSS). Off = save as draft.</span></label>
+  </div>
+  <div class="modal-foot"><button type="button" class="btn btn-light" data-close="bOverlay">Cancel</button><button type="submit" class="btn btn-primary" id="bSave">Save post</button></div>
+</form></div>
+
+<!-- lead contact card slideover -->
+<div id="leadPanel" class="slideover"></div>
+<div id="panelBackdrop" class="backdrop hidden" style="z-index:54"></div>
+
+<div id="toasts"></div>
+
+<script src="/admin/app.js"></script>
+</body>
+</html>

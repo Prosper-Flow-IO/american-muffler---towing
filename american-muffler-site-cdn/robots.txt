@@ -5,5 +5,6 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-# Preferred sitemap
+# Sitemaps
 Sitemap: https://www.americanmufflerandtowing.com/sitemap.xml
+Sitemap: https://www.americanmufflerandtowing.com/blog-sitemap.xml

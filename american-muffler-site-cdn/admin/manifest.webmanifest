@@ -1,0 +1,15 @@
+{
+  "name": "American Muffler & Towing — Dashboard",
+  "short_name": "AM&T Admin",
+  "description": "Manage products, leads, and settings for American Muffler & Towing.",
+  "start_url": "/admin/",
+  "scope": "/admin/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0E1116",
+  "theme_color": "#C8102E",
+  "icons": [
+    { "src": "/admin/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/admin/icon.svg", "sizes": "512x512", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

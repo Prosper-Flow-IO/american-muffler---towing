@@ -1,0 +1,14 @@
+# Dependencies (Netlify installs these from package.json during build)
+node_modules/
+
+# Local Netlify folder
+.netlify
+
+# Secrets — never commit. All secrets live in Netlify env vars.
+.env
+.env.*
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
