@@ -9,6 +9,123 @@
   node_bundler = "esbuild"
 
 # ---------------------------------------------------------------
+# Legacy WordPress URLs -> current structure.
+#
+# The old site (WordPress, retired July 2026) is still what Google
+# ranks and serves for several terms, and every one of these paths
+# has been returning a hard 404 since the relaunch — including
+# /towing-service/, which holds position ~4 for Gallup towing.
+#
+# First match wins, so these sit ahead of the pretty-URL rules
+# below. None of these paths collide with a current-site URL.
+# ---------------------------------------------------------------
+
+# /index.html serves a 200 duplicate of the homepage. force is
+# required here to override the real file at that path.
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+# Service pages. Each old page plus its /index.html form; explicit
+# rule first so an empty splat can't fall through.
+[[redirects]]
+  from = "/towing-service"
+  to = "/services/towing/"
+  status = 301
+
+[[redirects]]
+  from = "/towing-service/*"
+  to = "/services/towing/"
+  status = 301
+
+[[redirects]]
+  from = "/newused-tires"
+  to = "/services/tires/"
+  status = 301
+
+[[redirects]]
+  from = "/newused-tires/*"
+  to = "/services/tires/"
+  status = 301
+
+[[redirects]]
+  from = "/junk-car-removal"
+  to = "/services/junk-car-removal/"
+  status = 301
+
+[[redirects]]
+  from = "/junk-car-removal/*"
+  to = "/services/junk-car-removal/"
+  status = 301
+
+[[redirects]]
+  from = "/auto-repair"
+  to = "/services/auto-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/auto-repair/*"
+  to = "/services/auto-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/roadside-assistance"
+  to = "/services/roadside-assistance/"
+  status = 301
+
+[[redirects]]
+  from = "/roadside-assistance/*"
+  to = "/services/roadside-assistance/"
+  status = 301
+
+# Contact / location
+[[redirects]]
+  from = "/contact-us"
+  to = "/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/contact-us/*"
+  to = "/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/find-us"
+  to = "/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/find-us/*"
+  to = "/contact/"
+  status = 301
+
+# /reviews/ is unchanged on the new site, so only the old
+# index.html form needs mapping — no bare /reviews rule, or the
+# real page would stop winning.
+[[redirects]]
+  from = "/reviews/index.html"
+  to = "/reviews/"
+  status = 301
+
+# Old WordPress feeds -> the rss.xml function
+[[redirects]]
+  from = "/feed"
+  to = "/rss.xml"
+  status = 301
+
+[[redirects]]
+  from = "/feed/*"
+  to = "/rss.xml"
+  status = 301
+
+[[redirects]]
+  from = "/home/feed/*"
+  to = "/rss.xml"
+  status = 301
+
+# ---------------------------------------------------------------
 # Pretty URLs for the new Shop page and Admin portal
 # ---------------------------------------------------------------
 
