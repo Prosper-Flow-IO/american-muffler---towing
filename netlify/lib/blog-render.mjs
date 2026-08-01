@@ -103,7 +103,10 @@ function footer() {
 </a>`;
 }
 
-export function page({ title, description, canonical, ogImage, headExtra = '', main }) {
+// ogImage defaults to the site image so every page gets a social card. Without
+// it the og:image/twitter:card pair below is skipped entirely, which is how
+// /blog/ ended up as the only blog page with no card while posts had one.
+export function page({ title, description, canonical, ogImage = SITE.image, headExtra = '', main }) {
   return `<!doctype html>
 <html lang="en">
 <head>
