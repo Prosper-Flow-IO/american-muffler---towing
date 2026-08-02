@@ -130,12 +130,6 @@
 # ---------------------------------------------------------------
 
 [[redirects]]
-  from = "/shop/"
-  to = "/shop.html"
-  status = 200
-  force = true
-
-[[redirects]]
   from = "/shop.html"
   to = "/shop/"
   status = 301
