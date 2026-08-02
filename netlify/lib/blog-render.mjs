@@ -21,12 +21,35 @@ export function businessNode() {
     foundingDate: '2012',
     image: SITE.image,
     logo: { '@type': 'ImageObject', url: SITE.icon },
+    // Only profiles verified to be this business. A sameAs pointing at the
+    // wrong entity is worse than a missing one — it tells engines the business
+    // is something else. Waze, Yellow Pages, Loc8NearMe and Trust Mechanics all
+    // list it too, but each blocked automated checks, so none are claimed here
+    // until a human confirms them.
+    sameAs: [
+      'https://www.google.com/maps/place/?q=place_id:ChIJL8oUd97eJIcRQ7t5-c_Qj-g',
+      'https://www.facebook.com/p/American-Muffler-and-Towing-100054548645014/',
+      'https://www.yelp.com/biz/american-muffler-and-towing-gallup-2',
+    ],
     address: { '@type': 'PostalAddress', streetAddress: '827 N 9th St', addressLocality: 'Gallup', addressRegion: 'NM', postalCode: '87301', addressCountry: 'US' },
     geo: { '@type': 'GeoCoordinates', latitude: 35.535092, longitude: -108.755228 },
     openingHours: ['Mo-Sa 09:00-17:00'],
     areaServed: ['Gallup NM', 'Church Rock NM', 'Thoreau NM', 'Grants NM', 'Milan NM', 'Yah-Ta-Hey NM', 'Zuni NM', 'Crownpoint NM', 'Window Rock AZ', 'Fort Defiance AZ', 'Lupton AZ', 'I-40 Corridor', 'Navajo Nation']
       .map((n) => ({ '@type': 'Place', name: n })),
-    sameAs: ['https://www.facebook.com/p/American-Muffler-and-Towing-100054548645014/', 'https://www.yelp.com/biz/american-muffler-and-towing-gallup-2'],
+    // Mirrors the static pages so the business node is identical wherever it
+    // appears, rather than depending on engines merging partial nodes by @id.
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Services',
+      itemListElement: [
+        'Towing (light, medium & heavy duty)',
+        'Roadside assistance',
+        'Auto repair',
+        'Muffler & exhaust',
+        'New & used tires',
+        'Junk car removal',
+      ].map((n) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: n } })),
+    },
   };
 }
 
