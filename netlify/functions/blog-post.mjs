@@ -4,6 +4,28 @@ import { mdToHtml, escapeHtml, toPlain } from '../lib/markdown.mjs';
 
 const fmt = (iso) => iso ? new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
 
+// Which towns each corridor post actually covers. Used for contentLocation.
+// Add a slug here when a new town post is published; an absent slug is fine
+// and simply produces no contentLocation.
+const POST_PLACES = {
+  'thoreau-nm-exit-53-towing-roadside': [['Thoreau', 'NM']],
+  'grants-milan-towing-roadside-i40-exit-85': [['Grants', 'NM'], ['Milan', 'NM']],
+  'towing-church-rock-red-rock-east-of-gallup': [['Church Rock', 'NM'], ['Red Rock', 'NM']],
+  'yah-ta-hey-us-491-towing-roadside-north-gallup': [['Yah-Ta-Hey', 'NM']],
+  'towing-auto-repair-window-rock-az': [['Window Rock', 'AZ']],
+  'roadside-assistance-towing-fort-defiance-az': [['Fort Defiance', 'AZ']],
+  'lupton-arizona-state-line-towing-i40-exit-359': [['Lupton', 'AZ']],
+  'towing-across-navajo-nation-crownpoint-window-rock': [['Crownpoint', 'NM'], ['Window Rock', 'AZ']],
+  'towing-roadside-nm-602-zuni-pueblo': [['Zuni', 'NM']],
+  'continental-divide-i40-winter-breakdown-help': [['Thoreau', 'NM'], ['Gallup', 'NM']],
+  'tires-junk-car-removal-gallup-mckinley-county': [['Gallup', 'NM']],
+  'muffler-exhaust-catalytic-converter-gallup': [['Gallup', 'NM']],
+  '24-7-towing-gallup-nm': [['Gallup', 'NM']],
+  'what-to-do-when-your-car-breaks-down-on-i-40-near-gallup': [['Gallup', 'NM']],
+  'i-40-roadside-assistance-grants-to-arizona': [['Grants', 'NM'], ['Gallup', 'NM'], ['Lupton', 'AZ']],
+  'heavy-duty-semi-truck-towing-i-40': [['Gallup', 'NM']],
+};
+
 export default async (req, context) => {
   const slug = context.params?.slug;
   const posts = await listPosts();
@@ -29,6 +51,18 @@ export default async (req, context) => {
     ? `<div class="prose" style="margin-top:44px"><h2>Frequently asked questions</h2><div class="faq-list">${faqs.map((f) => `<details><summary><h3>${escapeHtml(f.q)}</h3></summary><p>${escapeHtml(f.a)}</p></details>`).join('')}</div></div>`
     : '';
 
+  // Towns each corridor post is actually about. Emitted as contentLocation so
+  // engines can tie the article to a place, not just to the business.
+  //
+  // Deliberately name + address only, no coordinates: town centroids would be
+  // guessed rather than verified, and a wrong lat/long is worse than none.
+  // A slug that isn't listed simply gets no contentLocation.
+  const places = (POST_PLACES[post.slug] || []).map(([locality, region]) => ({
+    '@type': 'Place',
+    name: `${locality}, ${region}`,
+    address: { '@type': 'PostalAddress', addressLocality: locality, addressRegion: region, addressCountry: 'US' },
+  }));
+
   // ---- Structured data: one @graph tying the article to the local business ----
   const graph = [
     businessNode(),
@@ -46,6 +80,7 @@ export default async (req, context) => {
       author: { '@id': `${SITE.base}/#business` },
       publisher: { '@id': `${SITE.base}/#business` },
       mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+      ...(places.length ? { contentLocation: places.length === 1 ? places[0] : places } : {}),
       ...(post.tags?.length ? { keywords: post.tags.join(', ') } : {}),
     },
     breadcrumbNode([
@@ -77,7 +112,10 @@ export default async (req, context) => {
     ${cover}
     <article class="prose">${mdToHtml(post.content)}${tags}</article>
     ${faqHtml}
-    <div style="max-width:780px;margin:36px auto 0"><a class="btn btn-ghost" href="/blog/" style="background:var(--ink);color:#fff">← Back to blog</a></div>
+    <div style="max-width:780px;margin:36px auto 0;display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn btn-ghost" href="/blog/" style="background:var(--ink);color:#fff">← Back to blog</a>
+      <a class="btn btn-ghost" href="/service-areas/">Service areas across the I-40 corridor</a>
+    </div>
   </div>
 </section>`;
 
