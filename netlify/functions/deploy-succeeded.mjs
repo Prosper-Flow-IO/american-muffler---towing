@@ -26,26 +26,38 @@ async function urlsFrom(sitemap) {
   }
 }
 
+// Every path logs. The first version only logged on success, which made a
+// silent skip indistinguishable from a silent failure in the Netlify log.
+const log = (msg) => console.log(`[indexnow] ${msg}`);
+
 export default async (req) => {
   // Only production deploys should ping. Draft and branch deploys would submit
   // URLs that aren't live, or re-submit unchanged ones for no reason.
   let context = 'unknown';
+  let shape = 'unread';
   try {
     const body = await req.json();
-    context = body?.payload?.context ?? body?.context ?? 'unknown';
-  } catch {
-    // Payload shape is Netlify's, not ours. If it can't be read, skip rather
-    // than ping blind — a wrong submission is worse than a missed one.
+    // Netlify owns this payload shape, so record what actually arrived rather
+    // than trusting an assumption about where context lives.
+    shape = Object.keys(body || {}).join(',') || 'empty';
+    context = body?.payload?.context ?? body?.context ?? body?.payload?.state ?? 'unknown';
+  } catch (err) {
+    shape = `unreadable: ${err?.message || err}`;
   }
+  log(`invoked. payload keys=[${shape}] context=${context}`);
+
   if (context !== 'production') {
+    log(`skipped: context=${context} is not production`);
     return new Response(`skipped: context=${context}`, { status: 200 });
   }
 
   const lists = await Promise.all(SITEMAPS.map(urlsFrom));
   const urlList = [...new Set(lists.flat())].filter((u) => u.startsWith(BASE));
 
+  log(`resolved ${urlList.length} unique URLs from ${SITEMAPS.length} sitemaps`);
   if (!urlList.length) {
     // Sitemaps unreachable or empty. Submitting nothing is correct here.
+    log('skipped: no URLs resolved from sitemaps');
     return new Response('skipped: no URLs resolved from sitemaps', { status: 200 });
   }
 
@@ -55,12 +67,12 @@ export default async (req) => {
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
       body: JSON.stringify({ host: HOST, key: KEY, keyLocation: `${BASE}/${KEY}.txt`, urlList }),
     });
-    const msg = `IndexNow ${res.status} for ${urlList.length} URLs`;
-    console.log(msg);
+    const msg = `IndexNow responded ${res.status} for ${urlList.length} URLs`;
+    log(msg);
     return new Response(msg, { status: 200 });
   } catch (err) {
     // Never fail the deploy over a submission. Log and move on.
-    console.error('IndexNow ping failed:', err?.message || err);
+    log(`ping FAILED: ${err?.message || err}`);
     return new Response('IndexNow ping failed (deploy unaffected)', { status: 200 });
   }
 };
