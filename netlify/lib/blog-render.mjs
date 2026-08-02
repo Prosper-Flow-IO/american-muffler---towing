@@ -22,7 +22,7 @@ export function businessNode() {
     image: SITE.image,
     logo: { '@type': 'ImageObject', url: SITE.icon },
     address: { '@type': 'PostalAddress', streetAddress: '827 N 9th St', addressLocality: 'Gallup', addressRegion: 'NM', postalCode: '87301', addressCountry: 'US' },
-    geo: { '@type': 'GeoCoordinates', latitude: 35.5370, longitude: -108.7389 },
+    geo: { '@type': 'GeoCoordinates', latitude: 35.535092, longitude: -108.755228 },
     openingHours: ['Mo-Sa 09:00-17:00'],
     areaServed: ['Gallup NM', 'Church Rock NM', 'Thoreau NM', 'Grants NM', 'Milan NM', 'Yah-Ta-Hey NM', 'Zuni NM', 'Crownpoint NM', 'Window Rock AZ', 'Fort Defiance AZ', 'Lupton AZ', 'I-40 Corridor', 'Navajo Nation']
       .map((n) => ({ '@type': 'Place', name: n })),
