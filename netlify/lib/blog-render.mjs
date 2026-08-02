@@ -39,7 +39,20 @@ export function breadcrumbNode(items) {
 
 const PHONE_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.35 1.84.59 2.8.72A2 2 0 0 1 22 16.92Z"/></svg>';
 
-function header() {
+// `current` is the nav path to mark with aria-current. It used to be hardcoded
+// to /blog/, which was fine while this shell only rendered blog pages and wrong
+// as soon as it rendered anything else.
+const NAV = [
+  ['/services/', 'Services'],
+  ['/shop/', 'Shop'],
+  ['/blog/', 'Blog'],
+  ['/service-areas/', 'Service Areas'],
+  ['/reviews/', 'Reviews'],
+  ['/about/', 'About'],
+  ['/contact/', 'Contact'],
+];
+
+function header(current = '/blog/') {
   return `<div class="emergency" role="status" aria-live="polite">
   Broke down? Our tow line answers 24/7 — <a href="tel:${SITE.phone}">call ${SITE.phoneDisplay}</a>
 </div>
@@ -47,12 +60,7 @@ function header() {
   <div class="container nav">
     <a href="/" class="brand" aria-label="${SITE.name} home"><span class="mark" aria-hidden="true">A</span><span>American Muffler &amp; Towing<small>Gallup, NM · Since 2012</small></span></a>
     <nav aria-label="Primary"><ul>
-      <li><a href="/services/">Services</a></li>
-      <li><a href="/shop/">Shop</a></li>
-      <li><a href="/blog/" aria-current="page">Blog</a></li>
-      <li><a href="/service-areas/">Service Areas</a></li>
-      <li><a href="/about/">About</a></li>
-      <li><a href="/contact/">Contact</a></li>
+      ${NAV.map(([href, label]) => `<li><a href="${href}"${href === current ? ' aria-current="page"' : ''}>${label}</a></li>`).join('\n      ')}
     </ul></nav>
     <a class="call-btn" href="tel:${SITE.phone}" aria-label="Call ${SITE.phoneDisplay}">${PHONE_SVG} ${SITE.phoneDisplay}</a>
   </div>
@@ -106,7 +114,9 @@ function footer() {
 // ogImage defaults to the site image so every page gets a social card. Without
 // it the og:image/twitter:card pair below is skipped entirely, which is how
 // /blog/ ended up as the only blog page with no card while posts had one.
-export function page({ title, description, canonical, ogImage = SITE.image, headExtra = '', main }) {
+// ogType defaults to 'article' because every original caller was a blog page.
+// Non-article callers (the shop catalogue) pass 'website'.
+export function page({ title, description, canonical, ogImage = SITE.image, ogType = 'article', navCurrent = '/blog/', headExtra = '', main }) {
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -116,7 +126,7 @@ export function page({ title, description, canonical, ogImage = SITE.image, head
 <meta name="description" content="${description}" />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href="${canonical}" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="${ogType}" />
 <meta property="og:site_name" content="American Muffler &amp; Towing" />
 <meta property="og:title" content="${title}" />
 <meta property="og:description" content="${description}" />
@@ -128,7 +138,7 @@ ${ogImage ? `<meta property="og:image" content="${ogImage}" />\n<meta name="twit
 ${headExtra}
 </head>
 <body>
-${header()}
+${header(navCurrent)}
 ${main}
 ${footer()}
 <script>var y=document.getElementById('year');if(y)y.textContent=new Date().getFullYear();</script>
