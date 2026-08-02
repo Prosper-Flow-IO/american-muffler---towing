@@ -26,7 +26,7 @@ export default async (req, context) => {
     ? `<div style="margin-top:34px;display:flex;gap:8px;flex-wrap:wrap">${post.tags.map((t) => `<span style="background:#f0ece2;color:var(--ink-2);font-size:13px;font-weight:600;padding:5px 12px;border-radius:999px">${escapeHtml(t)}</span>`).join('')}</div>`
     : '';
   const faqHtml = faqs.length
-    ? `<div class="prose" style="margin-top:44px"><h2>Frequently asked questions</h2><div class="faq-list">${faqs.map((f) => `<details><summary>${escapeHtml(f.q)}</summary><p>${escapeHtml(f.a)}</p></details>`).join('')}</div></div>`
+    ? `<div class="prose" style="margin-top:44px"><h2>Frequently asked questions</h2><div class="faq-list">${faqs.map((f) => `<details><summary><h3>${escapeHtml(f.q)}</h3></summary><p>${escapeHtml(f.a)}</p></details>`).join('')}</div></div>`
     : '';
 
   // ---- Structured data: one @graph tying the article to the local business ----
