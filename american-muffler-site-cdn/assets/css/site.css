@@ -290,3 +290,4 @@ footer ul li{margin-bottom:8px}
 .shop-empty{text-align:center;padding:60px 20px;color:var(--muted)}
 .shop-empty h2{color:var(--ink)}
 .shop-loading{text-align:center;padding:60px 20px;color:var(--muted)}
+.updated{max-width:1120px;margin:0 auto;padding:0 0 34px;color:var(--muted);font-size:13.5px;text-align:center}
