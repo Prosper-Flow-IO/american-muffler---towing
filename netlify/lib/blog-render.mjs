@@ -4,8 +4,8 @@ export const SITE = {
   base: 'https://www.americanmufflerandtowing.com',
   phone: '+15058635990',
   phoneDisplay: '(505) 863-5990',
-  icon: 'https://assets.cdn.filesafe.space/kst2bkxitM1nA0d1KJd4/media/69e7fc386fc69286f3b76ef1.jpeg',
-  image: 'https://assets.cdn.filesafe.space/kst2bkxitM1nA0d1KJd4/media/69e7fc385e482c379bc6a675.jpeg',
+  icon: 'https://www.americanmufflerandtowing.com/assets/img/favicon.jpg',
+  image: 'https://www.americanmufflerandtowing.com/assets/img/american-muffler-towing-storefront-gallup-nm.jpg',
 };
 
 // Canonical business entity — reused by @id across all blog pages so search &
