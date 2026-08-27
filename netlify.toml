@@ -252,16 +252,6 @@
   status = 301
   force = true
 
-# Netlify also serves the extensionless form of every flat file, so
-# /services-tires returns a 200 duplicate of the same page. The rule
-# above only covers the .html form. force is required: to Netlify this
-# path resolves to a real asset, and a non-forced rule would lose to it.
-[[redirects]]
-  from = "/services-tires"
-  to = "/services/tires/"
-  status = 301
-  force = true
-
 [[redirects]]
   from = "/services-junk-car-removal.html"
   to = "/services/junk-car-removal/"
@@ -300,6 +290,90 @@
 
 [[redirects]]
   from = "/contact.html"
+  to = "/contact/"
+  status = 301
+  force = true
+
+# ---------------------------------------------------------------
+# Extensionless duplicates.
+#
+# Netlify serves the extensionless form of every flat file, so
+# /about answered 200 with the same page as /about/ — a second
+# indexable URL per page that the .html rules above do not cover.
+# Measured 27 Aug 2026: all twelve returned 200.
+#
+# force is required. To Netlify these paths resolve to real assets,
+# and a non-forced redirect loses to a static file.
+# ---------------------------------------------------------------
+
+[[redirects]]
+  from = "/services-towing"
+  to = "/services/towing/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services-roadside-assistance"
+  to = "/services/roadside-assistance/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services-auto-repair"
+  to = "/services/auto-repair/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services-muffler-exhaust"
+  to = "/services/muffler-exhaust/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services-tires"
+  to = "/services/tires/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services-junk-car-removal"
+  to = "/services/junk-car-removal/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services"
+  to = "/services/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-gallup-nm"
+  to = "/service-areas/gallup-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas"
+  to = "/service-areas/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about"
+  to = "/about/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/reviews"
+  to = "/reviews/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact"
   to = "/contact/"
   status = 301
   force = true
