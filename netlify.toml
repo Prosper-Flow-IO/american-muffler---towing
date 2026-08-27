@@ -298,9 +298,17 @@
 # Extensionless duplicates.
 #
 # Netlify serves the extensionless form of every flat file, so
-# /about answered 200 with the same page as /about/ — a second
-# indexable URL per page that the .html rules above do not cover.
-# Measured 27 Aug 2026: all twelve returned 200.
+# /services-tires answered 200 with the same page as /services/tires/
+# — a second indexable URL that the .html rules above do not cover.
+#
+# Only paths whose canonical differs by more than a trailing slash are
+# listed. /about, /contact, /reviews, /services and /service-areas are
+# deliberately absent: Netlify treats /about and /about/ as the same
+# URL, so a rule between them is a self-redirect and is silently
+# dropped. Verified on a draft deploy 27 Aug 2026 — those five rules
+# were written, deployed, and did nothing. Both forms already serve a
+# canonical tag pointing at the slashed URL, so there is nothing left
+# to fix.
 #
 # force is required. To Netlify these paths resolve to real assets,
 # and a non-forced redirect loses to a static file.
@@ -343,40 +351,11 @@
   force = true
 
 [[redirects]]
-  from = "/services"
-  to = "/services/"
-  status = 301
-  force = true
-
-[[redirects]]
   from = "/service-areas-gallup-nm"
   to = "/service-areas/gallup-nm/"
   status = 301
   force = true
 
-[[redirects]]
-  from = "/service-areas"
-  to = "/service-areas/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/about"
-  to = "/about/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/reviews"
-  to = "/reviews/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/contact"
-  to = "/contact/"
-  status = 301
-  force = true
 
 # ---------------------------------------------------------------
 # Long-lived caching for static assets
