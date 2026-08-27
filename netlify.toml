@@ -252,6 +252,16 @@
   status = 301
   force = true
 
+# Netlify also serves the extensionless form of every flat file, so
+# /services-tires returns a 200 duplicate of the same page. The rule
+# above only covers the .html form. force is required: to Netlify this
+# path resolves to a real asset, and a non-forced rule would lose to it.
+[[redirects]]
+  from = "/services-tires"
+  to = "/services/tires/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/services-junk-car-removal.html"
   to = "/services/junk-car-removal/"
