@@ -194,6 +194,12 @@
   force = true
 
 [[redirects]]
+  from = "/service-areas/window-rock-az/"
+  to = "/service-areas-window-rock-az.html"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/service-areas/"
   to = "/service-areas.html"
   status = 200
@@ -267,6 +273,12 @@
 [[redirects]]
   from = "/service-areas-gallup-nm.html"
   to = "/service-areas/gallup-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-window-rock-az.html"
+  to = "/service-areas/window-rock-az/"
   status = 301
   force = true
 
@@ -353,6 +365,12 @@
 [[redirects]]
   from = "/service-areas-gallup-nm"
   to = "/service-areas/gallup-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-window-rock-az"
+  to = "/service-areas/window-rock-az/"
   status = 301
   force = true
 
