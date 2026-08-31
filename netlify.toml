@@ -194,6 +194,42 @@
   force = true
 
 [[redirects]]
+  from = "/service-areas/thoreau-nm/"
+  to = "/service-areas-thoreau-nm.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/service-areas/grants-nm/"
+  to = "/service-areas-grants-nm.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/service-areas/church-rock-nm/"
+  to = "/service-areas-church-rock-nm.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/service-areas/yah-ta-hey-nm/"
+  to = "/service-areas-yah-ta-hey-nm.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/service-areas/fort-defiance-az/"
+  to = "/service-areas-fort-defiance-az.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/service-areas/lupton-az/"
+  to = "/service-areas-lupton-az.html"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/service-areas/"
   to = "/service-areas.html"
   status = 200
@@ -267,6 +303,42 @@
 [[redirects]]
   from = "/service-areas-gallup-nm.html"
   to = "/service-areas/gallup-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-thoreau-nm.html"
+  to = "/service-areas/thoreau-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-grants-nm.html"
+  to = "/service-areas/grants-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-church-rock-nm.html"
+  to = "/service-areas/church-rock-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-yah-ta-hey-nm.html"
+  to = "/service-areas/yah-ta-hey-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-fort-defiance-az.html"
+  to = "/service-areas/fort-defiance-az/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-lupton-az.html"
+  to = "/service-areas/lupton-az/"
   status = 301
   force = true
 
@@ -353,6 +425,42 @@
 [[redirects]]
   from = "/service-areas-gallup-nm"
   to = "/service-areas/gallup-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-thoreau-nm"
+  to = "/service-areas/thoreau-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-grants-nm"
+  to = "/service-areas/grants-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-church-rock-nm"
+  to = "/service-areas/church-rock-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-yah-ta-hey-nm"
+  to = "/service-areas/yah-ta-hey-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-fort-defiance-az"
+  to = "/service-areas/fort-defiance-az/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-lupton-az"
+  to = "/service-areas/lupton-az/"
   status = 301
   force = true
 
