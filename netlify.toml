@@ -206,6 +206,12 @@
   force = true
 
 [[redirects]]
+  from = "/service-areas/yah-ta-hey-nm/"
+  to = "/service-areas-yah-ta-hey-nm.html"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/service-areas/"
   to = "/service-areas.html"
   status = 200
@@ -291,6 +297,12 @@
 [[redirects]]
   from = "/service-areas-church-rock-nm.html"
   to = "/service-areas/church-rock-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-yah-ta-hey-nm.html"
+  to = "/service-areas/yah-ta-hey-nm/"
   status = 301
   force = true
 
@@ -389,6 +401,12 @@
 [[redirects]]
   from = "/service-areas-church-rock-nm"
   to = "/service-areas/church-rock-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-yah-ta-hey-nm"
+  to = "/service-areas/yah-ta-hey-nm/"
   status = 301
   force = true
 
