@@ -230,6 +230,12 @@
   force = true
 
 [[redirects]]
+  from = "/service-areas/window-rock-az/"
+  to = "/service-areas-window-rock-az.html"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/service-areas/"
   to = "/service-areas.html"
   status = 200
@@ -342,6 +348,12 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/service-areas-window-rock-az.html"
+  to = "/service-areas/window-rock-az/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/service-areas.html"
   to = "/service-areas/"
@@ -464,6 +476,12 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/service-areas-window-rock-az"
+  to = "/service-areas/window-rock-az/"
+  status = 301
+  force = true
+
 
 # ---------------------------------------------------------------
 # Long-lived caching for static assets
