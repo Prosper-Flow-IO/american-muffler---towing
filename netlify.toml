@@ -218,6 +218,12 @@
   force = true
 
 [[redirects]]
+  from = "/service-areas/lupton-az/"
+  to = "/service-areas-lupton-az.html"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/service-areas/"
   to = "/service-areas.html"
   status = 200
@@ -315,6 +321,12 @@
 [[redirects]]
   from = "/service-areas-fort-defiance-az.html"
   to = "/service-areas/fort-defiance-az/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-lupton-az.html"
+  to = "/service-areas/lupton-az/"
   status = 301
   force = true
 
@@ -425,6 +437,12 @@
 [[redirects]]
   from = "/service-areas-fort-defiance-az"
   to = "/service-areas/fort-defiance-az/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-lupton-az"
+  to = "/service-areas/lupton-az/"
   status = 301
   force = true
 
