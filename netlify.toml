@@ -212,6 +212,12 @@
   force = true
 
 [[redirects]]
+  from = "/service-areas/fort-defiance-az/"
+  to = "/service-areas-fort-defiance-az.html"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/service-areas/"
   to = "/service-areas.html"
   status = 200
@@ -303,6 +309,12 @@
 [[redirects]]
   from = "/service-areas-yah-ta-hey-nm.html"
   to = "/service-areas/yah-ta-hey-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-fort-defiance-az.html"
+  to = "/service-areas/fort-defiance-az/"
   status = 301
   force = true
 
@@ -407,6 +419,12 @@
 [[redirects]]
   from = "/service-areas-yah-ta-hey-nm"
   to = "/service-areas/yah-ta-hey-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-fort-defiance-az"
+  to = "/service-areas/fort-defiance-az/"
   status = 301
   force = true
 
