@@ -200,6 +200,12 @@
   force = true
 
 [[redirects]]
+  from = "/service-areas/grants-nm/"
+  to = "/service-areas-grants-nm.html"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/service-areas/church-rock-nm/"
   to = "/service-areas-church-rock-nm.html"
   status = 200
@@ -303,6 +309,12 @@
 [[redirects]]
   from = "/service-areas-thoreau-nm.html"
   to = "/service-areas/thoreau-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-grants-nm.html"
+  to = "/service-areas/grants-nm/"
   status = 301
   force = true
 
@@ -419,6 +431,12 @@
 [[redirects]]
   from = "/service-areas-thoreau-nm"
   to = "/service-areas/thoreau-nm/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/service-areas-grants-nm"
+  to = "/service-areas/grants-nm/"
   status = 301
   force = true
 
