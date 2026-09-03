@@ -1,4 +1,17 @@
 // /llms.txt — machine-readable summary for LLMs / AI answer engines.
+//
+// KEEP THE SERVICE AREA PAGE LIST IN STEP WITH american-muffler-site-cdn/
+// service-areas-*.html. It is hardcoded, like Services, and it went stale:
+// eight town pages existed and this file listed none of them, naming the towns
+// in prose only. The 1 Aug AI visibility audit scored Local/GEO -17.5, its
+// largest deduction, on the finding that the site is "machine-readable, not
+// machine-known" — and the file whose whole job is telling AI engines what
+// exists was pointing at a hub page instead of the eight pages themselves.
+//
+// Response times are deliberately absent from these descriptions. The site's
+// published windows contradict each other between service-areas.html and
+// services-towing.html, and this file is built to be ingested — a disputed
+// figure does more damage here than on a page a human reads.
 import { listPosts } from '../lib/store.mjs';
 import { SITE } from '../lib/blog-render.mjs';
 import { toPlain } from '../lib/markdown.mjs';
@@ -23,6 +36,16 @@ American Muffler & Towing is located at 827 N 9th Street, Gallup, NM 87301. The 
 
 ## Service area
 Gallup, Church Rock, Thoreau, Grants, Milan, Yah-Ta-Hey, Zuni, and Crownpoint (NM); Window Rock, Fort Defiance, and Lupton (AZ); the I-40 corridor from Grants to the Arizona state line; and across the Navajo Nation.
+
+## Service area pages
+- [Gallup, NM](${SITE.base}/service-areas/gallup-nm/): Home base — the shop at 827 N 9th Street.
+- [Thoreau, NM](${SITE.base}/service-areas/thoreau-nm/): East along I-40, near the frequent breakdown spot at MM 53.
+- [Church Rock, NM](${SITE.base}/service-areas/church-rock-nm/): Just east of Gallup, covering the truck stop and Red Rock Park.
+- [Yah-Ta-Hey, NM](${SITE.base}/service-areas/yah-ta-hey-nm/): North of Gallup on US 491.
+- [Grants, NM](${SITE.base}/service-areas/grants-nm/): Further east on I-40; heavy truck and RV work common.
+- [Window Rock, AZ](${SITE.base}/service-areas/window-rock-az/): Navajo Nation capital, west on Route 264.
+- [Fort Defiance, AZ](${SITE.base}/service-areas/fort-defiance-az/): North of Window Rock.
+- [Lupton, AZ](${SITE.base}/service-areas/lupton-az/): Across the Arizona state line on I-40.
 
 ## Key pages
 - [Home](${SITE.base}/)
